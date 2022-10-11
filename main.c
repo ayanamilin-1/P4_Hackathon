@@ -3,6 +3,7 @@
 #include <math.h>
 
 #define IP_ADDR unsigned int
+#define SEED 7878696
 
 // a and b are random coefficients of hash function
 IP_ADDR a;
@@ -44,19 +45,19 @@ int main()
     IP_ADDR ip_addr, ip_addr_1, ip_addr_2, ip_addr_3, ip_addr_4;
     int max_zeros = 0;
     
-    srand(178232);
+    srand(SEED);
 
     int a1 = rand() % (int)(pow(2, 8));
     int a2 = rand() % (int)(pow(2, 8));
     int a3 = rand() % (int)(pow(2, 8));
     int a4 = rand() % (int)(pow(2, 8));
-    a = a1 * pow(2, 11) + a2 * pow(2, 7) + a3 * pow(2, 3) + a4;
+    a = a1 * pow(2, 24) + a2 * pow(2, 16) + a3 * pow(2, 8) + a4;
 
     int b1 = rand() % (int)(pow(2, 8));
     int b2 = rand() % (int)(pow(2, 8));
     int b3 = rand() % (int)(pow(2, 8));
     int b4 = rand() % (int)(pow(2, 8));
-    b = b1 * pow(2, 11) + b2 * pow(2, 7) + b3 * pow(2, 3) + b4;
+    b = b1 * pow(2, 24) + b2 * pow(2, 16) + b3 * pow(2, 8) + b4;
 
     fp = fopen("./ip_stream.txt", "r");
     if (fp==NULL) 
@@ -66,7 +67,7 @@ int main()
     }
     while ((fscanf(fp, "%d.%d.%d.%d", &ip_addr_1, &ip_addr_2, &ip_addr_3, &ip_addr_4)) != EOF)
     {
-        ip_addr = ip_addr_1 * pow(2, 11) + ip_addr_2 * pow(2, 7) + ip_addr_3 * pow(2, 3) + ip_addr_4;
+        ip_addr = ip_addr_1 * pow(2, 24) + ip_addr_2 * pow(2, 16) + ip_addr_3 * pow(2, 8) + ip_addr_4;
         distinct_elements(ip_addr, &max_zeros);
     }
     fclose(fp);
