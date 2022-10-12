@@ -1,3 +1,4 @@
+// Generate ip_stream.txt file
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
