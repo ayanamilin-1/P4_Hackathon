@@ -3,7 +3,6 @@
 void swap(int *p, int *q)
 {
     int t;
-
     t = *p;
     *p = *q;
     *q = t;
@@ -12,7 +11,6 @@ void swap(int *p, int *q)
 void sort(int a[], int n)
 {
     int i, j, temp;
-
     for (i = 0; i < n - 1; i++)
     {
         for (j = 0; j < n - i - 1; j++)
