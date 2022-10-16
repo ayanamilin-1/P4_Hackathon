@@ -4,19 +4,9 @@
 #include <malloc.h>
 #include "zeros.h"
 #include "sort.h"
-
+#include "random.h"
 
 #define SEED 7878696
-
-
-
-
-
-
-
-
-
-
 
 int main()
 {
@@ -40,17 +30,9 @@ int main()
 
     for (i = 0; i < ntimes; i++)
     {
-        a1 = rand() % (int)(pow(2, 8));
-        a2 = rand() % (int)(pow(2, 8));
-        a3 = rand() % (int)(pow(2, 8));
-        a4 = rand() % (int)(pow(2, 8));
-        a = a1 * pow(2, 24) + a2 * pow(2, 16) + a3 * pow(2, 8) + a4;
+        a = random_ip(rand());
 
-        b1 = rand() % (int)(pow(2, 8));
-        b2 = rand() % (int)(pow(2, 8));
-        b3 = rand() % (int)(pow(2, 8));
-        b4 = rand() % (int)(pow(2, 8));
-        b = b1 * pow(2, 24) + b2 * pow(2, 16) + b3 * pow(2, 8) + b4;
+        b = random_ip(rand());
 
         fp = fopen("./ip_stream.txt", "r");
         if (fp == NULL)
@@ -64,10 +46,16 @@ int main()
             distinct_elements(ip_addr, &max_zeros, a, b);
         }
         max_zeros_arr[i] = max_zeros;
+        max_zeros = 0;
         fclose(fp);
     }
+    printf("\n");
     sort(max_zeros_arr, ntimes);
-    max_zeros = max_zeros_arr[(ntimes+1) / 2 - 1];
-    printf("Estimated number of distinct ip address: %f", pow(2, max_zeros + 0.5));
+    max_zeros = max_zeros_arr[(ntimes + 1) / 2 - 1];
+    printf("Estimated number of distinct ip address: %f\n", pow(2, max_zeros + 0.5));
+
+    for (i = 0; i < ntimes; i++)
+        printf("%d ", max_zeros_arr[i]);
+
     return 0;
 }
